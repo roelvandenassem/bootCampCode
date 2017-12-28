@@ -1,6 +1,7 @@
 package chapterSix;
 
 import io.github.bonigarcia.wdm.ChromeDriverManager;
+import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -26,7 +27,10 @@ public class FillCartTest {
             driver.findElement(By.xpath("//a[@title=\'iPod shuffle\']")).click();
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//button[contains(.,'Add to cart')]"))));
             driver.findElement(By.xpath("//button[contains(.,'Add to cart')]")).click();
-           // driver.findElement(By.xpath("//span[@title='Continue shopping']")).click();
+            wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[contains(.,'Continue shopping')]"))));
+            driver.findElement(By.xpath("//span[@title='Continue shopping']")).click();
+            String productInCart = driver.findElement(By.xpath("//*[@id=\"header\"]/div[2]/div/div/div[3]/div/a/span[1]")).getText();
+            Assertions.assertThat(productInCart).as("My shopping cart is empty.").isEqualToIgnoringCase("1");
 
             driver.quit();
         }
