@@ -36,7 +36,7 @@ public class FirstSeleniumTest {
 
 /*
     @BeforeTest
-    public void logInSuccesFull() {
+    public void logInSuccesful() {
         ChromeDriverManager.getInstance().setup();
         WebDriver driver = new ChromeDriver();
 
