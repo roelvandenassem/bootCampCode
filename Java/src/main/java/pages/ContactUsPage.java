@@ -13,32 +13,32 @@ public class ContactUsPage {
 
 
     // @FindBy(css="input[id=email")
-    @FindBy(id="email")
+    @FindBy(id = "email")
     private WebElement emailField;
 
-    @FindBy(id="id_order")
+    @FindBy(id = "id_order")
     private WebElement orderReferenceField;
 
-    @FindBy(id="message")
+    @FindBy(id = "message")
     private WebElement messageField;
 
-    @FindBy(id="submitMessage")
+    @FindBy(id = "submitMessage")
     private WebElement submitButton;
 
-    @FindBy(xpath=("//p[contains(@class, \"alert\")"])
-    private WebElement alertMessageText;
+//    @FindBy(xpath=("//p[contains(@class, \"alert\")"])
+//    private WebElement alertMessageText;
 
 //    @FindBy(id="id_contact")
 //    private WebElement idContactDropdown;
 
 
-    public ContactUsPage(WebDriver driver){
+    public ContactUsPage(WebDriver driver) {
         this.driver = driver;
 
         PageFactory.initElements(driver, this);
     }
 
-    public void submitForm(String email, String orderReference, String message){
+    public void submitForm(String email, String orderReference, String message) {
         Select subjectHeading = new Select(driver.findElement(By.cssSelector("select#id_contact")));
         subjectHeading.selectByVisibleText("Customer service");
         emailField.sendKeys(email);
@@ -48,8 +48,8 @@ public class ContactUsPage {
 
     }
 
-    public String getAlertMessage(){
-        return alertMessageText.getText();
-    }
+    // public String getAlertMessage(){
+    //     return alertMessageText.getText();
+//}
 
 }
