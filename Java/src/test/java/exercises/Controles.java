@@ -20,7 +20,7 @@ public class Controles {
 
     @Test
     public void assertStringIsNotEmpty() {
-        String testString = "Hello";
+        String testString = "";
         Assertions.assertThat(testString).as("String is not present").isNotBlank();
     }
 }

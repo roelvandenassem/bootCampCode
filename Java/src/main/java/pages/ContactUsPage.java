@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ContactUsPage {
 
-    WebDriver driver;
+    private WebDriver driver;
 
 
     // @FindBy(css="input[id=email")

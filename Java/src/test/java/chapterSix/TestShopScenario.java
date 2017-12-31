@@ -9,22 +9,21 @@ import org.testng.annotations.BeforeMethod;
 
 public class TestShopScenario {
 
+    String url = "https://techblog.polteq.com/testshop/index.php";
     String password = "Bootcamp";
     String username = "roel.vandenassem@polteq.com";
 
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    public WebDriver driver;
+    WebDriverWait wait;
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod (alwaysRun = true)
     public void setUp(){
 
         driver = BrowserFactory.getDriver("chrome");
-
-        // Maximise window
+        // Maximize window
         driver.manage().window().maximize();
-
         // Open the website
-        driver.get("https://techblog.polteq.com/testshop/index.php");
+        driver.get(url);
         wait = new WebDriverWait(driver, 15, 50);
     }
 
@@ -40,4 +39,5 @@ public class TestShopScenario {
         driver.findElement(By.id("passwd")).sendKeys(password);
         driver.findElement(By.id("SubmitLogin")).click();
     }
+
 }
