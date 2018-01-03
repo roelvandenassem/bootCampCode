@@ -12,6 +12,7 @@ import java.util.List;
 public class MyWishListsPage {
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     @FindBy(id = "block-history")
     private  WebElement wishListsTable;
@@ -22,14 +23,19 @@ public class MyWishListsPage {
     @FindBy(id = "submitWishlist")
     private WebElement submitWishListButton;
 
+    @FindBy(xpath = "//*[@id='mywishlist']/ul/li[1]/a/span)")
+    private WebElement goToAccountButton;
+
 
     public MyWishListsPage(WebDriver driver) {
+
         this.driver = driver;
         PageFactory.initElements(driver, this);
         WebDriverWait wait = new WebDriverWait(driver, 30);
     }
 
     public void makeNewWishList(String newWishListName) {
+
         nameField.sendKeys(newWishListName);
         submitWishListButton.click();
         driver.navigate().refresh();
@@ -42,12 +48,32 @@ public class MyWishListsPage {
 //        return rows.size();
 //    }
 //
-//    public int getOldWishListRow(){
-//
-//        //Make a list of the table rows to get the number of rows/rows.size
-//        List<WebElement> rows = wishListsTable.findElements(By.tagName("tr"));
-//        return OldWishListRow;
+//    public int getOldWishListRow(String oldWishListName) {
+//        for (int i = 0; i < getRowsSize(); i++) {
+//            List<WebElement> row = wishListsTable.findElements(By.tagName("tr"));
+//            if (row.contains(oldWishList)) {
+//                oldWishListRow = i;
+//                break;
+//            }
+//        }
+//        return oldWishListRow;
 //    }
+
+    public boolean presenceOfWishList(String wishListName) {
+
+        //Make a list of the table rows to get the number of rows/rows.size
+        List<WebElement> rows = wishListsTable.findElements(By.tagName("tr"));
+        //Iterate rows to get column.size and the content of each column in the row
+        for (int row = 0; row < rows.size(); row++) {
+            List<WebElement> columns = rows.get(row).findElements(By.tagName("td"));
+            String rowContent = rows.get(row).getText();
+
+            if (!rowContent.contains(wishListName)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public void deleteWishList(WebDriver driver, String oldWishListName) {
 

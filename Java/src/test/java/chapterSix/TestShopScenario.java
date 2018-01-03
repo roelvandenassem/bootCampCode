@@ -14,7 +14,7 @@ public class TestShopScenario {
     String username = "roel.vandenassem@polteq.com";
 
     public WebDriver driver;
-    WebDriverWait wait;
+    public WebDriverWait wait;
 
     @BeforeMethod (alwaysRun = true)
     public void setUp(){
