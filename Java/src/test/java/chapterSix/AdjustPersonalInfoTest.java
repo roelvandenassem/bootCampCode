@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import pages.LogInPage;
 
 public class AdjustPersonalInfoTest extends TestShopScenario {
 
@@ -12,7 +13,9 @@ public class AdjustPersonalInfoTest extends TestShopScenario {
         if (driver.findElement(By.className("login")).isDisplayed());
         {
             HomePage homePage = new HomePage(driver);
-            homePage.login("roel.vandenassem@polteq.com", "Bootcamp");
+            HomePage.goTologInPage();
+            LogInPage logInPage = new LogInPage(driver);
+            LogInPage.login("roel.vandenassem@polteq.com", "Bootcamp");
             driver.findElement(By.className("icon-user")).click();
         }
         //else{

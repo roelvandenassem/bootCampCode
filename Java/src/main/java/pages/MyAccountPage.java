@@ -14,15 +14,13 @@ public class MyAccountPage {
         private static WebElement wishListButton;
 
 
-
-
         public MyAccountPage(WebDriver driver) {
             this.driver = driver;
 
             PageFactory.initElements(driver, this);
         }
 
-        public static void goToMyWishLists() {
+        public static void goToMyWishListsPage() {
             wishListButton.click();
         }
 }

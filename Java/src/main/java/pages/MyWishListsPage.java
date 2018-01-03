@@ -5,16 +5,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MyWishListsPage {
 
     private WebDriver driver;
 
+    @FindBy(id = "block-history")
+    private  WebElement wishListsTable;
 
-    // @FindBy(css="input[id=email")
     @FindBy(id = "name")
     private WebElement nameField;
 
@@ -25,41 +26,54 @@ public class MyWishListsPage {
     public MyWishListsPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        WebDriverWait wait = new WebDriverWait(driver, 30);
     }
 
-    public void makeNewWishList(String wishListName){
-        nameField.sendKeys(wishListName);
+    public void makeNewWishList(String newWishListName) {
+        nameField.sendKeys(newWishListName);
         submitWishListButton.click();
+        driver.navigate().refresh();
     }
 
-    public void deleteWishList(WebDriver driver){
-            WebElement wishListsTable = driver.findElement(By.xpath("//*[@id='block-history']/table"));
-            List<WebElement> rows = wishListsTable.findElements(By.tagName("tr"));
-            List<WebElement> columns = wishListsTable.findElements(By.tagName("td"));
-            List<String> value = new ArrayList<String>();
-
-//            System.out.println(rows.size());
+//    public int getRowsSize(){
 //
-//            for (int j=0; j<columns.size(); j++){
-//                System.out.println(columns.get(j).getText());
-//                value.add(columns.get(j).getText());
-//            }
+//        //Make a list of the table rows to get the number of rows/rows.size
+//        List<WebElement> rows = wishListsTable.findElements(By.tagName("tr"));
+//        return rows.size();
+//    }
+//
+//    public int getOldWishListRow(){
+//
+//        //Make a list of the table rows to get the number of rows/rows.size
+//        List<WebElement> rows = wishListsTable.findElements(By.tagName("tr"));
+//        return OldWishListRow;
+//    }
 
-//        List<WebElement> row = wishListsTable.findElements(By.xpath(".//tbody/tr"));
-//        List<WebElement> column = row.get(row.indexOf(row)).findElements(By.xpath(".//td"));
-//        column.get(index).getText().equals("Feel the pain");
+    public void deleteWishList(WebDriver driver, String oldWishListName) {
 
-        String wishListName = "Feel the pain";
-        //First loop will find the name of the wish list in the first column
-        for (int i=1;i<=rows.size();i++) {
-            String firstColValue = null;
-            firstColValue = driver.findElement(By.xpath(".//*[@id='block-history']/table/tbody/tr[1]/th[" + i + "]")).getText();
-            if (firstColValue.equalsIgnoreCase(wishListName)) {
+        //Make a list of the table rows to get the number of rows/rows.size
+        List<WebElement> rows = wishListsTable.findElements(By.tagName("tr"));
+        System.out.println("Number of rows in this table = " + rows.size());
 
-                // If the sValue match with the description, it will initiate one more inner loop for all the columns of 'i' row
-                for (int j = 1; j <= 2; j++) {
-                    String rowValue = driver.findElement(By.xpath(".//*[@id='block-history']/table/tbody/tr[" + j + "]/td[" + i + "]")).getText();
-                    System.out.println(rowValue);
+        //Iterate rows to get column.size and the content of each column in the row
+        for (int row = 0; row < rows.size(); row++) {
+            List<WebElement> columns = rows.get(row).findElements(By.tagName("td"));
+            String rowContent = rows.get(row).getText();
+            System.out.println(rowContent);
+
+            //Find the correct row containing the name of the old wish list
+            if (rowContent.contains(oldWishListName)) {
+                //Iterate columns for this particular row that contains the name of the old wish list
+                for (int column = 0; column < columns.size(); column++) {
+                    //Get the class of each column so we can search for the column with the delete button next
+                    String columnContent = columns.get(column).getAttribute("class");
+                    //Find the correct column containing the delete button and click on it
+                    if (columnContent.equals("wishlist_delete")) {
+                        WebElement wishListDeleteButton = columns.get(column).findElement(By.className("icon-remove"));
+                        wishListDeleteButton.click();
+                        driver.switchTo().alert().accept();
+                        System.out.println("Deleting wish list " + "'" + oldWishListName + "'");
+                    }
                 }
                 break;
             }

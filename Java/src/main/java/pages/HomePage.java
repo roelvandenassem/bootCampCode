@@ -13,16 +13,6 @@ public class HomePage {
     @FindBy(className = "login")
     private static WebElement signInButton;
 
-    @FindBy(id = "email")
-    private static WebElement emailField;
-
-    @FindBy(id = "passwd")
-    private static WebElement passwordField;
-
-    @FindBy(id = "SubmitLogin")
-    private static WebElement submitLoginButton;
-
-
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -30,10 +20,8 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    public static void login(String username, String password) {
+    public static void goTologInPage() {
         signInButton.click();
-        emailField.sendKeys(username);
-        passwordField.sendKeys(password);
-        submitLoginButton.click();
+
     }
 }
