@@ -47,30 +47,23 @@ public class MyWishListsPage {
 //        List<WebElement> rows = wishListsTable.findElements(By.tagName("tr"));
 //        return rows.size();
 //    }
-//
-//    public int getOldWishListRow(String oldWishListName) {
-//        for (int i = 0; i < getRowsSize(); i++) {
-//            List<WebElement> row = wishListsTable.findElements(By.tagName("tr"));
-//            if (row.contains(oldWishList)) {
-//                oldWishListRow = i;
-//                break;
-//            }
-//        }
-//        return oldWishListRow;
-//    }
 
     public boolean presenceOfWishList(String wishListName) {
 
         //Make a list of the table rows to get the number of rows/rows.size
-        List<WebElement> rows = wishListsTable.findElements(By.tagName("tr"));
+        driver.navigate().refresh();
+        List<WebElement> rows = driver.findElements(By.tagName("tr"));
+        //System.out.println("Number of rows in this table = " + rows.size());
+
         //Iterate rows to get column.size and the content of each column in the row
+        String rowContent = null;
         for (int row = 0; row < rows.size(); row++) {
             List<WebElement> columns = rows.get(row).findElements(By.tagName("td"));
-            String rowContent = rows.get(row).getText();
-
-            if (!rowContent.contains(wishListName)) {
-                return false;
-            }
+            rowContent = rows.get(row).getText();
+            System.out.println(rowContent);
+        }
+        if (!rowContent.contains(wishListName)) {
+            return false;
         }
         return true;
     }
