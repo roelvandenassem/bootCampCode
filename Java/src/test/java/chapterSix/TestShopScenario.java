@@ -19,7 +19,7 @@ public class TestShopScenario {
     @BeforeMethod (alwaysRun = true)
     public void setUp(){
 
-        driver = BrowserFactory.getDriver("chrome");
+        driver = BrowserFactory.getDriver(BrowserFactory.Browsers.CHROME);
         // Maximize window
         driver.manage().window().maximize();
         // Open the website

@@ -4,39 +4,47 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 import io.github.bonigarcia.wdm.FirefoxDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class BrowserFactory {
 
     static WebDriver driver;
 
-    public static WebDriver getDriver(String browser){
-                driver = getChromeDriver();
-                return driver;
-    }
-
 //    public static WebDriver getDriver(String browser){
-//        switch(browser.toLowerCase()){
-//            case "chrome":
 //                driver = getChromeDriver();
-//                break;
-//            case "firefox":
-//            driver = getFireFoxDriver();
-//            break;
-//            default:
-//                driver = getChromeDriver();
-//                break;
-//        }
-//        return null;
+//                return driver;
 //    }
 
+    public static WebDriver getDriver(Browsers browsers){
+        switch(browsers){
+            case CHROME: default:
+                return getChromeDriver();
+            case FIREFOX:
+                return getFireFoxDriver();
+        }
+    }
+
     private static WebDriver getChromeDriver() {
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized", "ignore-certificate-errors");
+        options.addArguments("ignore-certificate-errors");
+        options.addArguments("chrome.switches", "--verbose");
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         ChromeDriverManager.getInstance().setup();
-        return driver = new ChromeDriver();
+        return new ChromeDriver(capabilities);
     }
 
     private static WebDriver getFireFoxDriver() {
+        DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         FirefoxDriverManager.getInstance().setup();
-        return driver = new FirefoxDriver();
+        return new FirefoxDriver(capabilities);
+    }
+
+    public enum Browsers {
+        CHROME,
+        FIREFOX
     }
 }
