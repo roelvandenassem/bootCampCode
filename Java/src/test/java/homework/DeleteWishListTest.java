@@ -24,13 +24,13 @@ public class DeleteWishListTest extends TestShopScenario{
 
         // login to personal account
         HomePage homePage = new HomePage(driver);
-        HomePage.goTologInPage();
+        homePage.goTologInPage();
         LogInPage logInPage = new LogInPage(driver);
-        LogInPage.login(username, password);
+        logInPage.login(username, password);
 
         // go to my wish lists page
         MyAccountPage myAccountPage= new MyAccountPage(driver);
-        MyAccountPage.goToMyWishListsPage();
+        myAccountPage.goToMyWishListsPage();
 
         // make new wish list
         MyWishListsPage myWishListsPage = new MyWishListsPage(driver);

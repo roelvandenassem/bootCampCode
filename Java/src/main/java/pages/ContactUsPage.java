@@ -45,11 +45,21 @@ public class ContactUsPage {
         orderReferenceField.sendKeys(orderReference);
         messageField.sendKeys(message);
         submitButton.click();
-
     }
 
-    // public String getAlertMessage(){
-    //     return alertMessageText.getText();
-//}
+    public void fillInFormWithoutSubmitting(String email, String orderReference, String message) {
+        Select subjectHeading = new Select(driver.findElement(By.cssSelector("select#id_contact")));
+        subjectHeading.selectByVisibleText("Customer service");
+        emailField.sendKeys(email);
+        orderReferenceField.sendKeys(orderReference);
+        messageField.sendKeys(message);
+    }
+
+    public void fillInCorrectEmail(String username, String message){
+        emailField.clear();
+        emailField.sendKeys(username);
+        messageField.clear();
+        messageField.sendKeys(message);
+    }
 
 }

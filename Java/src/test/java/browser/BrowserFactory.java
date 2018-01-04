@@ -43,9 +43,8 @@ public class BrowserFactory {
     }
 
     private static WebDriver getInternetExplorerDriver() {
-        DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
         InternetExplorerDriverManager.getInstance().setup();
-        return new InternetExplorerDriver(capabilities);
+        return new InternetExplorerDriver();
     }
 
     public enum Browsers {
