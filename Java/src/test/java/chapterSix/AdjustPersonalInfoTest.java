@@ -8,6 +8,9 @@ import pages.LogInPage;
 
 public class AdjustPersonalInfoTest extends TestShopScenario {
 
+    String username = "roel.vandenassem@polteq.com";
+    String password = "Bootcamp";
+
     @Test
     public void adjustPersonalInfo() {
         if (driver.findElement(By.className("login")).isDisplayed());
@@ -15,7 +18,9 @@ public class AdjustPersonalInfoTest extends TestShopScenario {
             HomePage homePage = new HomePage(driver);
             HomePage.goTologInPage();
             LogInPage logInPage = new LogInPage(driver);
-            LogInPage.login("roel.vandenassem@polteq.com", "Bootcamp");
+            logInPage.fillInUsername(username);
+            logInPage.fillInPassword(password);
+            logInPage.submitLogIn();
             driver.findElement(By.className("icon-user")).click();
         }
         //else{

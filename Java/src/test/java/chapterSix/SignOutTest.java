@@ -42,7 +42,8 @@ public class SignOutTest {
     @Test
     public void logOutSuccesful() {
         WebDriver driver = navigateToUrl();
-        LogInPage.login("Roel@vandenAssem.com", "1qazxsw2");
+        LogInPage.fillInUsername("Roel@vandenAssem.com");
+        LogInPage.fillInPassword("1qazxsw2");
         String userInfoTextLogIn = driver.findElement(By.className("header_user_info")).getText();
         Assertions.assertThat(userInfoTextLogIn).as("I'm not logged in.").isNotEqualToIgnoringCase("sign out");
         driver.findElement(By.className("logout")).click();

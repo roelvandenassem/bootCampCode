@@ -21,12 +21,13 @@ public class DeleteWishListTest extends TestShopScenario{
         String username = "Roel@vandenAssem.com";
         String password = "1qazxsw2";
 
-
         // login to personal account
         HomePage homePage = new HomePage(driver);
         homePage.goTologInPage();
         LogInPage logInPage = new LogInPage(driver);
-        logInPage.login(username, password);
+        logInPage.fillInUsername(username);
+        logInPage.fillInPassword(password);
+        logInPage.submitLogIn();
 
         // go to my wish lists page
         MyAccountPage myAccountPage= new MyAccountPage(driver);

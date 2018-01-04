@@ -8,7 +8,7 @@ import pages.ContactUsPage;
 
 public class FillInContactFormTest extends TestShopScenario{
 
-    String email = "bootcamper@feelthepain.com";
+    String username = "bootcamper@feelthepain.com";
     String orderReference = "4321234";
     String message = "Ipod defect while lifting, need new one";
 
@@ -18,7 +18,10 @@ public class FillInContactFormTest extends TestShopScenario{
         driver.findElement(By.cssSelector("a[title=contact]")).click();
 
         ContactUsPage contactUsPage = new ContactUsPage(driver);
-        contactUsPage.submitForm(email, orderReference, message);
+        contactUsPage.fillInMessage(message);
+        contactUsPage.fillInUsername(username);
+        contactUsPage.fillInOrderReference(orderReference);
+
         Assertions.assertThat(driver.findElement(By.className("alert-success")).getText())
                 .as("Alert message is not correct.").isEqualTo("Your message has been successfully sent to our team.");
 

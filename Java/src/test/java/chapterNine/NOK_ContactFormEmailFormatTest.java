@@ -3,16 +3,18 @@ package chapterNine;
 import chapterSix.TestShopScenario;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 import pages.ContactUsPage;
 import pages.HomePage;
 
 public class NOK_ContactFormEmailFormatTest extends TestShopScenario {
 
-    String username = "nope@correct.nl";
-    String email = "nope";
+    String usernameCorrect = "nope@correct.nl";
+    String usernameIncorrect = "nope";
     String orderReference = "4321234";
     String message = "Help!";
+    String subjectHeading = "Customer service";
 
     @Test
     public void nokContactFormEmailFormat() {
@@ -24,13 +26,18 @@ public class NOK_ContactFormEmailFormatTest extends TestShopScenario {
         homePage.goToContactUsPage();
 
         ContactUsPage contactUsPage = new ContactUsPage(driver);
-        contactUsPage.fillInFormWithoutSubmitting(email, orderReference, message);
+        contactUsPage.fillInUsername(usernameIncorrect);
+        contactUsPage.selectSubjectHeading(subjectHeading);
+        contactUsPage.fillInOrderReference(orderReference);
+        contactUsPage.fillInMessage(message);
 
-        Assertions.assertThat(driver.findElement(By.className("form-error")).getText())
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.className("form-error"))));
+        Assertions.assertThat(By.className("form-error").findElement(driver).getText())
                 .as("Form error is not meant for email address.").isEqualTo("Email address");
         System.out.println("Correct form error is found.");
 
-        contactUsPage.fillInCorrectEmail(username, message);
+        contactUsPage.fillInUsername(usernameCorrect);
+        contactUsPage.fillInMessage(message);
 
         Assertions.assertThat(driver.findElement(By.className("form-ok")).getText())
                 .as("Form ok is not meant for email address.").isEqualTo("Email address");
