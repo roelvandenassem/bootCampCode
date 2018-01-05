@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
+import pages.LogInPage;
 
 public class SignOutTest {
 
@@ -41,7 +42,7 @@ public class SignOutTest {
     @Test
     public void logOutSuccesful() {
         WebDriver driver = navigateToUrl();
-        login(driver);
+        LogInPage.login("Roel@vandenAssem.com", "1qazxsw2");
         String userInfoTextLogIn = driver.findElement(By.className("header_user_info")).getText();
         Assertions.assertThat(userInfoTextLogIn).as("I'm not logged in.").isNotEqualToIgnoringCase("sign out");
         driver.findElement(By.className("logout")).click();

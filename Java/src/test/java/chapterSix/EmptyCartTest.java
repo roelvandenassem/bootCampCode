@@ -29,7 +29,5 @@ public class EmptyCartTest extends TestShopScenario {
 //        WebElement deleteItems = driver.findElement(By.className("ajax_cart_block_remove_link"));
 //        actions.moveToElement(deleteItems).click();
 
-//*[@id="center_column"]/p
-
     }
 }

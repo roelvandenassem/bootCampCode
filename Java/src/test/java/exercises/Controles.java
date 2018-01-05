@@ -18,9 +18,9 @@ public class Controles {
         Assertions.assertThat(testString).as("String is not 'Hello'").isEqualTo("Hello");
     }
 
-    @Test
-    public void assertStringIsNotEmpty() {
-        String testString = "Hello";
-        Assertions.assertThat(testString).as("String is not present").isNotBlank();
-    }
+//    @Test
+//    public void assertStringIsNotEmpty() {
+//        String testString = "";
+//        Assertions.assertThat(testString).as("String is not present").isNotBlank();
+//    }
 }

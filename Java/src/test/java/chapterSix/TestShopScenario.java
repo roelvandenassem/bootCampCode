@@ -1,29 +1,29 @@
 package chapterSix;
 
-import io.github.bonigarcia.wdm.ChromeDriverManager;
+import browser.BrowserFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class TestShopScenario {
 
+    String url = "https://techblog.polteq.com/testshop/index.php";
     String password = "Bootcamp";
     String username = "roel.vandenassem@polteq.com";
 
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    public WebDriver driver;
+    public WebDriverWait wait;
 
-    @BeforeMethod
+    @BeforeMethod (alwaysRun = true)
     public void setUp(){
-        ChromeDriverManager.getInstance().setup();
-        driver = new ChromeDriver();
-        // Maximise window
+
+        driver = BrowserFactory.getDriver("chrome");
+        // Maximize window
         driver.manage().window().maximize();
         // Open the website
-        driver.get("https://techblog.polteq.com/testshop/index.php");
+        driver.get(url);
         wait = new WebDriverWait(driver, 15, 50);
     }
 
@@ -39,4 +39,5 @@ public class TestShopScenario {
         driver.findElement(By.id("passwd")).sendKeys(password);
         driver.findElement(By.id("SubmitLogin")).click();
     }
+
 }
