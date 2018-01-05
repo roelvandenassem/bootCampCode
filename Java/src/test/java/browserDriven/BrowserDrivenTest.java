@@ -1,12 +1,11 @@
-package chapterNine;
+package browserDriven;
 
-import chapterSix.TestShopScenario;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import pages.ContactUsPage;
 
-public class FillInContactFormTest extends TestShopScenario{
+public class BrowserDrivenTest extends TestShopScenarioBrowserDriven{
 
     String username = "bootcamper@feelthepain.com";
     String orderReference = "4321234";

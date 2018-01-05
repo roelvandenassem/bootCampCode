@@ -28,8 +28,9 @@ public class BrowserFactory {
     private static WebDriver getChromeDriver() {
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized", "ignore-certificate-errors");
-        options.addArguments("ignore-certificate-errors");
+        options.addArguments("start-maximized");
+        //options.addArguments("start-maximized", "ignore-certificate-errors");
+        //options.addArguments("ignore-certificate-errors");
         //options.addArguments("chrome.switches", "--verbose");
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         ChromeDriverManager.getInstance().setup();

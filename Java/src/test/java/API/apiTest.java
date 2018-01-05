@@ -39,6 +39,7 @@ public class apiTest {
     @Test
     public void pathParamTwo(){
 
+        //Variables must be added in order of appearance
         given().when().get("http://ergast.com/api/f1/{season}/{race}/results.json", seasonYear, raceNumber).
                 then().statusCode(200);
     }
