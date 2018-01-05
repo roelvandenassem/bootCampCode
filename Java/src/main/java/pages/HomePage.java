@@ -17,6 +17,9 @@ public class HomePage {
     @FindBy(className = "login")
     private static WebElement signInButton;
 
+    @FindBy(id = "contact-link")
+    private static WebElement contactUsButton;
+
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -29,5 +32,11 @@ public class HomePage {
         wait.until(ExpectedConditions.elementToBeClickable(By.className("login")));
         signInButton.click();
 
+    }
+
+    public static void goToContactUsPage() {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("contact-link")));
+        contactUsButton.click();
     }
 }

@@ -14,7 +14,7 @@ public class ContactUsPage {
 
     // @FindBy(css="input[id=email")
     @FindBy(id = "email")
-    private WebElement emailField;
+    private WebElement usernameField;
 
     @FindBy(id = "id_order")
     private WebElement orderReferenceField;
@@ -25,11 +25,12 @@ public class ContactUsPage {
     @FindBy(id = "submitMessage")
     private WebElement submitButton;
 
-//    @FindBy(xpath=("//p[contains(@class, \"alert\")"])
-//    private WebElement alertMessageText;
-
 //    @FindBy(id="id_contact")
-//    private WebElement idContactDropdown;
+//    private WebElement subjectHeading;
+
+    //    private WebElement alertMessageText;
+    //    @FindBy(xpath=("//p[contains(@class, \"alert\")"])
+
 
 
     public ContactUsPage(WebDriver driver) {
@@ -38,18 +39,34 @@ public class ContactUsPage {
         PageFactory.initElements(driver, this);
     }
 
-    public void submitForm(String email, String orderReference, String message) {
-        Select subjectHeading = new Select(driver.findElement(By.cssSelector("select#id_contact")));
-        subjectHeading.selectByVisibleText("Customer service");
-        emailField.sendKeys(email);
-        orderReferenceField.sendKeys(orderReference);
-        messageField.sendKeys(message);
-        submitButton.click();
-
+    public void clearFields(){
+        usernameField.clear();
+        messageField.clear();
+        orderReferenceField.clear();
     }
 
-    // public String getAlertMessage(){
-    //     return alertMessageText.getText();
-//}
+    public void fillInUsername(String username){
+        usernameField.clear();
+        usernameField.sendKeys(username);
+    }
+
+    public void fillInMessage(String message){
+        messageField.clear();
+        messageField.sendKeys(message);
+    }
+
+    public void fillInOrderReference(String orderReference){
+        orderReferenceField.clear();
+        orderReferenceField.sendKeys(orderReference);
+    }
+
+    public void submitForm(){
+        submitButton.click();
+    }
+
+    public void selectSubjectHeading(String subjectHeading){
+        Select subject = new Select(driver.findElement(By.cssSelector("select#id_contact")));
+        subject.selectByVisibleText(subjectHeading);
+    }
 
 }
